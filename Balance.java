@@ -1,12 +1,12 @@
 import java.util.EmptyStackException;
 import java.util.Stack;
 
-public class isBalance {
+public class Balance {
 	private Stack<Object> stk;
 	private int length;
 	String expression;
 
-	public isBalance(String expression) {
+	public Balance(String expression) {
 		stk = new Stack<Object>();
 		this.expression = expression;
 		this.length = expression.length();
