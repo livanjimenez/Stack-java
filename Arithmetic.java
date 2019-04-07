@@ -3,16 +3,16 @@ import java.util.EmptyStackException;
 import java.util.Scanner;
 
 class Arithmetic {
-	Stack<Object> stk;
+	Stack stk;
 	String expression, postfix;
 	int length;
 	String results;
 
 	Arithmetic(String s) {
 		expression = s;
-		postfix = "";
+		postfix = " ";
 		length = expression.length();
-		stk = new Stack<Object>();
+		stk = new Stack();
 	}
 
 	// Validate the expression - make sure parentheses are balanced
@@ -84,7 +84,7 @@ class Arithmetic {
 								 * Append token popped onto the output string Place at least one blank space
 								 * between each token
 								 */
-								postfix += postfix + top + " ";
+								postfix += top + " ";
 								ch = (Character) stk.pop();
 								top = ch.charValue();
 							}
@@ -97,7 +97,7 @@ class Arithmetic {
 							char top = ch.charValue();
 
 							while (top != Constants.LEFT_SQUARE) {
-								postfix += postfix + top + " ";
+								postfix += top + " ";
 								ch = (Character) stk.pop();
 								top = ch;
 							}
@@ -110,7 +110,7 @@ class Arithmetic {
 							char top = ch.charValue();
 
 							while (top != Constants.LEFT_CURLY) {
-								postfix += postfix + top + " ";
+								postfix += top + " ";
 								ch = (Character) stk.pop();
 								top = ch.charValue();
 							}
