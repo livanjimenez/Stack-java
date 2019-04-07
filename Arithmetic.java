@@ -178,14 +178,14 @@ class Arithmetic {
 	boolean isOperator(char ch) {
 		// define this method
 		switch (ch) {
-			case Constants.PLUS:
-			case Constants.MINUS:
-			case Constants.MULTIPLY:
-			case Constants.DIVIDE:
-			case Constants.MODULO:
-				return true;
-			default:
-				return false;
+		case Constants.PLUS:
+		case Constants.MINUS:
+		case Constants.MULTIPLY:
+		case Constants.DIVIDE:
+		case Constants.MODULO:
+			return true;
+		default:
+			return false;
 		}
 	}
 
@@ -193,23 +193,23 @@ class Arithmetic {
 		// define this method
 		int x, y = 0;
 		switch (top) {
-			case Constants.MULTIPLY:
-			case Constants.MODULO:
-			case Constants.DIVIDE:
-				x = 1;
-				break;
-			default:
-				x = 1;
+		case Constants.MULTIPLY:
+		case Constants.MODULO:
+		case Constants.DIVIDE:
+			x = 1;
+			break;
+		default:
+			x = 1;
 		}
 
 		switch (current) {
-			case Constants.MULTIPLY:
-			case Constants.MODULO:
-			case Constants.DIVIDE:
-				y = 1;
-				break;
-			default:
-				y = 0;
+		case Constants.MULTIPLY:
+		case Constants.MODULO:
+		case Constants.DIVIDE:
+			y = 1;
+			break;
+		default:
+			y = 0;
 		}
 
 		if (x < y) {
@@ -222,5 +222,61 @@ class Arithmetic {
 	String getPostfix() {
 		// define method
 		return postfix;
+	}
+
+	String evaluateRPN() {
+		Scanner scan = new Scanner(postfix);
+		stk.clear();
+
+		while (scan.hasNext()) {
+			String exp = scan.next();
+
+			if (isNumber(exp)) {
+				stk.push(new Integer(Integer.parseInt(exp)));
+			} else {
+				try {
+					int x = Integer.valueOf((Integer) stk.pop());
+					int y = Integer.valueOf((Integer) stk.pop());
+
+					char c = exp.charAt(0);
+
+					switch (c) {
+					case Constants.PLUS:
+						stk.push(new Integer(y + x));
+						break;
+					case Constants.MULTIPLY:
+						stk.push(new Integer(y * x));
+						break;
+					case Constants.DIVIDE:
+						stk.push(new Integer(y / x));
+						break;
+					case Constants.MINUS:
+						stk.push(new Integer(y - x));
+						break;
+					case Constants.MODULO:
+						stk.push(new Integer(y % x));
+						break;
+
+					default:
+						break;
+					}
+				} catch (EmptyStackException e) {
+					return "empty";
+				}
+			}
+		}
+		try {
+			results = "";
+			while (!stk.empty()) {
+				results += stk.pop();
+			}
+			if (stk.empty()) {
+				return results;
+			} else {
+				return "error";
+			}
+		} catch (EmptyStackException e) {
+			return "empty";
+		}
 	}
 }

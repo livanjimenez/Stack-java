@@ -1,0 +1,11 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - RPN",
+            "request": "launch",
+            "mainClass": "RPN",
+            "projectName": "Stack-java_87f51a80"
+        }
+    ]
+}

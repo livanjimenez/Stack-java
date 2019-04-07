@@ -20,6 +20,7 @@ class RPN
 				a.evaluateRPN();
 				
 				// Supply the necessary codes to determine the validity of your answers
+				System.out.println("Result: " + a.evaluateRPN() + "\n");
 			}
 			else
 				System.out.println("Expression is not balanced\n");
